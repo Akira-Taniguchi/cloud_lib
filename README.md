@@ -24,7 +24,7 @@ amazonやgoogleのクラウドサービスを利用できるAPIを作成しました
 
 
     def stop_instance(instance_id)
-+   `instance_id` :停止したいインスタンスのID
++   `instance_id` :停止したいインスタンスのID  
 
 
    `S3` :S3に関連する機能を保持したクラスです
