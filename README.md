@@ -38,119 +38,127 @@ stop_instance(instance_id):インスタンスを停止します
 ### S3
 #### S3に関連する機能を保持したクラスです
 ***
-get_keys(bucket_name, prefix=''):バケットに存在するキー情報を返却します。
+get_keys(bucket_name, prefix=''):バケットに存在するキー情報を返却します
 
 | 名前 | 必須 | 説明 | デフォルト値 | 
 |:-----------|:------------:|:-----------|:-----------| 
 | bucket_name | ◯ | 情報を取得したいバケット名 | - | 
-| prefix | ? | 取得したいキーのprefix | '' | 
+| prefix | ? | 取得したいキーのprefix | (0バイト文字列) | 
 戻り値：キー名称(yield)
 ***
+download_ascii_file(bucket_name, key, local_file_path, encoding='utf-8', errors='ignore'):アスキーファイルを取得します
 
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| bucket_name | ◯ | 情報を取得したいバケット名 | - | 
+| key | ◯ | 取得したいファイルのキー | - | 
+| local_file_path | ◯ | 取得したファイルのローカル配置先 | - |
+| encoding | ? | 取得するファイルの文字コード | utf-8 |
+| errors | ? | 文字コードでは再現出来ない文字があった時の動作、strict、ignore、replaceの内どれかを設定出来る | ignore |
+戻り値：なし
+***
+download_binary_file(bucket_name, key, local_file_path):バイナリファイルを取得します
 
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| bucket_name | ◯ | 情報を取得したいバケット名 | - | 
+| key | ◯ | 取得したいファイルのキー | - | 
+| local_file_path | ◯ | 取得したファイルのローカル配置先 | - |
+戻り値：なし
+***
+get_file_obj(bucket_name, key):ファイルオブジェクトを取得します
 
-   `S3` :S3に関連する機能を保持したクラスです
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| bucket_name | ◯ | 情報を取得したいバケット名 | - | 
+| key | ◯ | 取得したいファイルのキー | - | 
+戻り値：ファイルオブジェクト(StringIO)
+***
 
-    def get_keys(bucket_name, prefix='')
-+   `bucket_name` :キーを取得したいバケットの名称
+### BigQuery
+#### BigQueryに関連する機能を保持したクラスです
+***
+has_table(data_set_id, table_id):テーブルが存在するかどうか確認します
 
-+   `prefix` :取得したいキーのprefix
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| data_set_id | ◯ | 確認したいテーブルのデータセットID | - | 
+| table_id | ◯ | 確認したいテーブルのテーブルID | - | 
+戻り値：Bool
+***
+delete_table(data_set_id, table_id):テーブルを削除します
 
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| data_set_id | ◯ | 削除したいテーブルのデータセットID | - | 
+| table_id | ◯ | 削除したいテーブルのテーブルID | - | 
+戻り値：なし
+***
+create_table(source_csv_path, source_schema, data_set_id, table_id):テーブルを作成します
 
-    def download_ascii_file(bucket_name, key, local_file_path, encoding='utf-8', errors='ignore')
-+   `bucket_name` :取得したいファイルのバケット名称
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| source_csv_path | ◯ | データソースのCSVパス | - | 
+| source_schema | ◯ | データソースのスキーマ | - | 
+| data_set_id | ◯ | 作成したいテーブルのデータセットID | - | 
+| table_id | ◯ | 作成したいテーブルのテーブルID | - | 
+戻り値：ジョブの詳細(dictionary)
+***
+import_csv_from_storage(source_csv_path, source_schema, data_set_id, table_id):テーブルを作成し、データをインポートします
 
-+   `key` :取得したいファイルのキー
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| source_csv_path | ◯ | データソースのCSVパス | - | 
+| source_schema | ◯ | データソースのスキーマ | - | 
+| data_set_id | ◯ | 作成したいテーブルのデータセットID | - | 
+| table_id | ◯ | 作成したいテーブルのテーブルID | - | 
+戻り値：ジョブの詳細(dictionary)
+***
+query(query, time_out=60000):クエリを実行します
 
-+   `local_file_path` :取得したファイルのローカル配置先
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| query | ◯ | 実行するクエリ | - | 
+| time_out | ? | クエリの最大待機ミリ秒 | 60000 | 
+戻り値：レコード情報(yield)
+***
+get_table_list(data_set_id):テーブルリストを取得します
 
-+   `encoding` :取得したファイルの文字コード
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| data_set_id | ◯ | テーブル一覧を取得したいデータセットID | - | 
+戻り値：テーブル名称(yield)
+***
 
-+   `errors` :文字コードでは再現出来ない文字があった時の動作、strict、ignore、replaceの内どれかを設定出来る
+### CloudStorage
+#### google cloud storageに関連する機能を保持したクラスです
+***
+upload_file(local_file_path, bucket_name, storage_file_path):ファイルをアップロードします
 
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| local_file_path | ◯ | アップロードするファイルのローカルパス | - |
+| bucket_name | ◯ | アップロード先のバケット名称 | - |
+| storage_file_path | ◯ | アップロード先のファイルパス | - |
+戻り値：Bool
+***
+download_file(local_file_path, bucket_name, storage_file_path):ファイルをダウンロードします
 
-    def download_binary_file(bucket_name, key, local_file_path):
-+   `bucket_name` :取得したいファイルのバケット名称
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| local_file_path | ◯ | ダウンロード先のローカルパス | - |
+| bucket_name | ◯ | ダウンロード元のバケット名称 | - |
+| storage_file_path | ◯ | ダウンロード元のファイルパス | - |
+戻り値：Bool
+***
+get_list(bucket_name, name_prefix=None, content_type=None):存在するファイルのリストを取得します
 
-+   `key` :取得したいファイルのキー
-
-+   `local_file_path` :取得したファイルのローカル配置先
-
-
-    def get_file_obj(bucket_name, key):
-+   `bucket_name` :取得したいファイルのバケット名称
-
-+   `key` :取得したいファイルのキー
-
-
-   `BigQuery` :BigQueryに関連する機能を保持したクラスです
- 
-     def has_table(data_set_id, table_id):
-+   `data_set_id` :データセットID
-
-+   `table_id` :存在を確認したいtable_id
-
-
-     def delete_table(data_set_id, table_id):
-+   `data_set_id` :データセットID
-
-+   `table_id` :削除したいtable_id
-    
-
-     def create_table(source_csv_path, source_schema, data_set_id, table_id):
-+   `source_csv_path` :データソースのCSVパス
-
-+   `source_schema` :データソースのスキーマ
-
-+   `data_set_id` :データセットID
-
-+   `table_id` :table_id
-    
-
-    def import_csv_from_storage(storage_path, source_schema, data_set_id, table_id):
-+   `source_csv_path` :データソースのCSVパス
-
-+   `source_schema` :データソースのスキーマ
-
-+   `data_set_id` :データセットID
-
-+   `table_id` :table_id
-
-
-    def query(query, time_out=60000):
-+   `query` :実行したいクエリ
-
-+   `time_out` :最大待機ミリ秒数
-
-
-    def get_table_list(data_set_id):
-+   `data_set_id` :データセットID
-
-
-   `CloudStorage` :google cloud storageに関連する機能を保持したクラスです
-
-    def upload_file(local_file_path, bucket_name, storage_file_path):
-+   `local_file_path` :アップロードしたいファイルパス
-
-+   `bucket_name` :アップロード先のバケット名
-
-+   `storage_file_path` :アップロード先のファイルパス
-
-
-    def download_file(local_file_path, bucket_name, storage_file_path):
-+   `local_file_path` :ダウンロード先のローカルファイルパス
-
-+   `bucket_name` :ファイルが存在するバケット名
-
-+   `storage_file_path` :ダウンロードしたいファイルのパス
-
-
-    def get_list(bucket_name, name_prefix=None, content_type=None):
-+   `bucket_name` :ファイルリストを取得したいバケット名
-
-+   `name_prefix` :取得したいキーのprefix
-
-+   `content_type` :取得したいファイルのコンテントタイプ
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| bucket_name | ◯ | ダウンロード元のバケット名称 | - |
+| name_prefix | ? | 取得したいキーのprefix | None |
+| content_type | ? | 取得したいファイルのコンテントタイプ | None |
+戻り値：List
 
   
 関連情報
