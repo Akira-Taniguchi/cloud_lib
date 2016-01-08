@@ -16,10 +16,14 @@ class AbsGoogleServices(object):
 
     def __init__(self, client_id, client_secret, refresh_token):
         credentials = self.__get_credentials(client_id, client_secret, refresh_token)
-        self.service = build(self.get_service_name(), 'v2', credentials=credentials)
+        self.service = build(self.get_service_name(), self.get_api_version(), credentials=credentials)
 
     @abstractmethod
     def get_service_name(self):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_api_version(self):
         raise NotImplementedError()
 
     def __get_credentials(self, client_id, client_secret, refresh_token):
@@ -54,6 +58,9 @@ class BigQuery(AbsGoogleServices):
 
     def get_service_name(self):
         return 'bigquery'
+
+    def get_api_version(self):
+        return 'v2'
 
     def has_table(self, data_set_id, table_id):
         for table in self.get_table_list(data_set_id):
@@ -189,6 +196,9 @@ class BigQuery(AbsGoogleServices):
 class CloudStorage(AbsGoogleServices):
     def get_service_name(self):
         return 'storage'
+
+    def get_api_version(self):
+        return 'v1'
 
     def upload_file(self, local_file_path, bucket_name, storage_file_path):
         media = MediaFileUpload(local_file_path, resumable=True)
