@@ -43,7 +43,7 @@ get_keys(bucket_name, prefix=''):ƒoƒPƒbƒg‚É‘¶İ‚·‚éƒL[î•ñ‚ğ•Ô‹p‚µ‚Ü‚·
 | –¼‘O | •K{ | à–¾ | ƒfƒtƒHƒ‹ƒg’l | 
 |:-----------|:------------:|:-----------|:-----------| 
 | bucket_name | ü | î•ñ‚ğæ“¾‚µ‚½‚¢ƒoƒPƒbƒg–¼ | - | 
-| prefix | ? | æ“¾‚µ‚½‚¢ƒL[‚Ìprefix | (0ƒoƒCƒg•¶š—ñ) | 
+| prefix | ~ | æ“¾‚µ‚½‚¢ƒL[‚Ìprefix | (0ƒoƒCƒg•¶š—ñ) | 
 –ß‚è’lFƒL[–¼Ì(yield)
 ***
 download_ascii_file(bucket_name, key, local_file_path, encoding='utf-8', errors='ignore'):ƒAƒXƒL[ƒtƒ@ƒCƒ‹‚ğæ“¾‚µ‚Ü‚·
@@ -53,8 +53,8 @@ download_ascii_file(bucket_name, key, local_file_path, encoding='utf-8', errors=
 | bucket_name | ü | î•ñ‚ğæ“¾‚µ‚½‚¢ƒoƒPƒbƒg–¼ | - | 
 | key | ü | æ“¾‚µ‚½‚¢ƒtƒ@ƒCƒ‹‚ÌƒL[ | - | 
 | local_file_path | ü | æ“¾‚µ‚½ƒtƒ@ƒCƒ‹‚Ìƒ[ƒJƒ‹”z’uæ | - |
-| encoding | ? | æ“¾‚·‚éƒtƒ@ƒCƒ‹‚Ì•¶šƒR[ƒh | utf-8 |
-| errors | ? | •¶šƒR[ƒh‚Å‚ÍÄŒ»o—ˆ‚È‚¢•¶š‚ª‚ ‚Á‚½‚Ì“®ìAstrictAignoreAreplace‚Ì“à‚Ç‚ê‚©‚ğİ’èo—ˆ‚é | ignore |
+| encoding | ~ | æ“¾‚·‚éƒtƒ@ƒCƒ‹‚Ì•¶šƒR[ƒh | utf-8 |
+| errors | ~ | •¶šƒR[ƒh‚Å‚ÍÄŒ»o—ˆ‚È‚¢•¶š‚ª‚ ‚Á‚½‚Ì“®ìAstrictAignoreAreplace‚Ì“à‚Ç‚ê‚©‚ğİ’èo—ˆ‚é | ignore |
 –ß‚è’lF‚È‚µ
 ***
 download_binary_file(bucket_name, key, local_file_path):ƒoƒCƒiƒŠƒtƒ@ƒCƒ‹‚ğæ“¾‚µ‚Ü‚·
@@ -119,7 +119,7 @@ query(query, time_out=60000):ƒNƒGƒŠ‚ğÀs‚µ‚Ü‚·
 | –¼‘O | •K{ | à–¾ | ƒfƒtƒHƒ‹ƒg’l | 
 |:-----------|:------------:|:-----------|:-----------| 
 | query | ü | Às‚·‚éƒNƒGƒŠ | - | 
-| time_out | ? | ƒNƒGƒŠ‚ÌÅ‘å‘Ò‹@ƒ~ƒŠ•b | 60000 | 
+| time_out | ~ | ƒNƒGƒŠ‚ÌÅ‘å‘Ò‹@ƒ~ƒŠ•b | 60000 | 
 –ß‚è’lFƒŒƒR[ƒhî•ñ(yield)
 ***
 get_table_list(data_set_id):ƒe[ƒuƒ‹ƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·
@@ -156,8 +156,8 @@ get_list(bucket_name, name_prefix=None, content_type=None):‘¶İ‚·‚éƒtƒ@ƒCƒ‹‚ÌƒŠƒ
 | –¼‘O | •K{ | à–¾ | ƒfƒtƒHƒ‹ƒg’l | 
 |:-----------|:------------:|:-----------|:-----------| 
 | bucket_name | ü | ƒ_ƒEƒ“ƒ[ƒhŒ³‚ÌƒoƒPƒbƒg–¼Ì | - |
-| name_prefix | ? | æ“¾‚µ‚½‚¢ƒL[‚Ìprefix | None |
-| content_type | ? | æ“¾‚µ‚½‚¢ƒtƒ@ƒCƒ‹‚ÌƒRƒ“ƒeƒ“ƒgƒ^ƒCƒv | None |
+| name_prefix | ~ | æ“¾‚µ‚½‚¢ƒL[‚Ìprefix | None |
+| content_type | ~ | æ“¾‚µ‚½‚¢ƒtƒ@ƒCƒ‹‚ÌƒRƒ“ƒeƒ“ƒgƒ^ƒCƒv | None |
 –ß‚è’lFList
 
   
