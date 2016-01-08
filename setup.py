@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='cloud_lib',
-    version='1.0.1',
+    version='1.0.2',
     description='Cloud Service Library',
-    long_description='cloud service library',
+    long_description='Cloud Service Library',
     url='https://github.com/Akira-Taniguchi/cloud_lib',
     author='AkiraTaniguchi',
     author_email ='dededededaiou2003@yahoo.co.jp',
