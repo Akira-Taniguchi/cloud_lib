@@ -5,7 +5,11 @@ amazonやgoogleのクラウドサービスを利用できるAPIを作成しました
 
 使い方
 ------
-クラスをインポートし、接続情報をコンストラクタで指定してください
+１．pipコマンドを実行し、モジュールをダウンロードしてください。
+
+    pip install cloud_lib
+
+２．クラスをインポートし、接続情報をコンストラクタで指定してください
 
     from cloud_lib.amazon_services import Ec2
     ec2_service = Ec2(aws_access_key_id, aws_secret_access_key, region_name)
