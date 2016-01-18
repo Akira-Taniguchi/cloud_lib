@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cloud_lib',
-    version='1.0.4',
+    version='1.0.5',
     description='Cloud Service Library',
     long_description='https://pypi.python.org/pypi/cloud_lib',
     url='https://github.com/Akira-Taniguchi/cloud_lib',
