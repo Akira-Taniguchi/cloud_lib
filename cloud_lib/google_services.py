@@ -241,6 +241,8 @@ class CloudStorage(AbsGoogleServices):
         item_list = []
         while req is not None:
             resp = req.execute()
+            if len(resp) == 0:
+                break
             for item_info in resp['items']:
                 if content_type is not None:
                     if item_info['contentType'] != content_type:
