@@ -75,8 +75,9 @@ class BigQuery(AbsGoogleServices):
         body = self.__create_table_data(source_csv_path, source_schema, data_set_id, table_id)
         return self.__wait_job(body)
 
-    def import_csv_from_storage(self, storage_path, source_schema, data_set_id, table_id):
-        body = self.__create_load_data(storage_path, data_set_id, table_id, source_schema)
+    def import_csv_from_storage(self, storage_path, source_schema, data_set_id, table_id,
+                                write_disposition='WRITE_EMPTY'):
+        body = self.__create_load_data(storage_path, data_set_id, table_id, source_schema, write_disposition)
         return self.__wait_job(body)
 
     def query(self, query, time_out=60000):
@@ -170,7 +171,7 @@ class BigQuery(AbsGoogleServices):
                 has_next = False
             yield response
 
-    def __create_load_data(self, storage_path, data_set_id, table_id, source_schema):
+    def __create_load_data(self, storage_path, data_set_id, table_id, source_schema, write_disposition):
         return {
             "jobReference": {
                 "projectId": self.__project_id,
@@ -187,7 +188,7 @@ class BigQuery(AbsGoogleServices):
                         'datasetId': data_set_id,
                         'tableId': table_id
                     },
-                    'writeDisposition': 'WRITE_TRUNCATE'
+                    'writeDisposition': write_disposition
                 }
             }
         }

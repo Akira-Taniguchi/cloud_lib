@@ -116,6 +116,7 @@ import_csv_from_storage(source_csv_path, source_schema, data_set_id, table_id):ƒ
 | source_schema | ü | ƒf[ƒ^ƒ\[ƒX‚ÌƒXƒL[ƒ} | - | 
 | data_set_id | ü | ì¬‚µ‚½‚¢ƒe[ƒuƒ‹‚Ìƒf[ƒ^ƒZƒbƒgID | - | 
 | table_id | ü | ì¬‚µ‚½‚¢ƒe[ƒuƒ‹‚Ìƒe[ƒuƒ‹ID | - | 
+| write_disposition | ~ | ‚·‚Å‚Éƒe[ƒuƒ‹‚ª‘¶İ‚µ‚½ê‡‚Ì“®ìAuWRITE_TRUNCATEvuWRITE_APPENDvuWRITE_EMPTYv‚ªw’è‚Å‚«‚é| WRITE_EMPTY |
 –ß‚è’lFƒWƒ‡ƒu‚ÌÚ×(dictionary)
 ***
 query(query, time_out=60000):ƒNƒGƒŠ‚ğÀs‚µ‚Ü‚·
