@@ -108,6 +108,15 @@ create_table(source_csv_path, source_schema, data_set_id, table_id):テーブルを作
 | table_id | ◯ | 作成したいテーブルのテーブルID | - | 
 戻り値：ジョブの詳細(dictionary)
 ***
+create_view(data_set_id, view_name, query):viewを作成します
+
+| 名前 | 必須 | 説明 | デフォルト値 | 
+|:-----------|:------------:|:-----------|:-----------| 
+| data_set_id | ◯ | 作成したいテーブルのデータセットID | - | 
+| view_name | ◯ | viewの名称 | - |
+| query | ◯ | viewを作成するクエリ | - | 
+戻り値：ジョブの詳細(dictionary)
+***
 import_csv_from_storage(source_csv_path, source_schema, data_set_id, table_id):テーブルを作成し、データをインポートします
 
 | 名前 | 必須 | 説明 | デフォルト値 | 

@@ -75,6 +75,19 @@ class BigQuery(AbsGoogleServices):
         body = self.__create_table_data(source_csv_path, source_schema, data_set_id, table_id)
         return self.__wait_job(body)
 
+    def create_view(self, data_set_id, view_name, query):
+        body = {
+            'tableReference': {
+                'tableId': view_name,
+                'projectId': self.__project_id,
+                'datasetId': data_set_id
+            },
+            'view': {
+                'query': query
+            }
+        }
+        self.service.tables().insert(projectId=self.__project_id, datasetId=data_set_id, body=body).execute()
+
     def import_csv_from_storage(self, storage_path, source_schema, data_set_id, table_id,
                                 write_disposition='WRITE_EMPTY'):
         body = self.__create_load_data(storage_path, data_set_id, table_id, source_schema, write_disposition)
@@ -253,4 +266,3 @@ class CloudStorage(AbsGoogleServices):
                 item_list.append(item_info)
             req = self.service.objects().list_next(req, resp)
         return item_list
-
