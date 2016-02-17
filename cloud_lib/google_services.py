@@ -88,6 +88,11 @@ class BigQuery(AbsGoogleServices):
         }
         self.service.tables().insert(projectId=self.__project_id, datasetId=data_set_id, body=body).execute()
 
+    def get_record_count(self, data_set_id, table_name):
+        query = 'SELECT COUNT(*) FROM {0}.{1}'.format(data_set_id, table_name)
+        for data_dict in self.query(query):
+            return int(data_dict['rows'][0][0])
+
     def import_csv_from_storage(self, storage_path, source_schema, data_set_id, table_id,
                                 write_disposition='WRITE_EMPTY'):
         body = self.__create_load_data(storage_path, data_set_id, table_id, source_schema, write_disposition)
