@@ -128,12 +128,13 @@ import_csv_from_storage(source_csv_path, source_schema, data_set_id, table_id):ƒ
 | write_disposition | ~ | ‚·‚Å‚Éƒe[ƒuƒ‹‚ª‘¶İ‚µ‚½ê‡‚Ì“®ìAuWRITE_TRUNCATEvuWRITE_APPENDvuWRITE_EMPTYv‚ªw’è‚Å‚«‚é| WRITE_EMPTY |
 –ß‚è’lFƒWƒ‡ƒu‚ÌÚ×(dictionary)
 ***
-query(query, time_out=60000):ƒNƒGƒŠ‚ğÀs‚µ‚Ü‚·
+query(query, time_out=60000, allow_large_results=False):ƒNƒGƒŠ‚ğÀs‚µ‚Ü‚·
 
 | –¼‘O | •K{ | à–¾ | ƒfƒtƒHƒ‹ƒg’l | 
 |:-----------|:------------:|:-----------|:-----------| 
 | query | ü | Às‚·‚éƒNƒGƒŠ | - | 
 | time_out | ~ | ƒNƒGƒŠ‚ÌÅ‘å‘Ò‹@ƒ~ƒŠ•b | 60000 | 
+| allow_large_results | ~ | limit‚ğ’´‚¦‚½Œ‹‰ÊƒTƒCƒY‚ğ‹–—e‚·‚é‚© | False |
 –ß‚è’lFƒŒƒR[ƒhî•ñ(yield)
 ***
 get_table_list(data_set_id):ƒe[ƒuƒ‹ƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·

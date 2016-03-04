@@ -98,7 +98,7 @@ class BigQuery(AbsGoogleServices):
         body = self.__create_load_data(storage_path, data_set_id, table_id, source_schema, write_disposition)
         return self.__wait_job(body)
 
-    def query(self, query, time_out=60000):
+    def query(self, query, time_out=60000, allow_large_results=False):
         def create_record_dict(rows):
             return {
                 'rows': rows,
@@ -108,7 +108,8 @@ class BigQuery(AbsGoogleServices):
 
         query_data = {
             'query': query,
-            'timeoutMs': time_out
+            'timeoutMs': time_out,
+            'allowLargeResults': allow_large_results
         }
         response = self.service.jobs().query(
             projectId=self.__project_id,
