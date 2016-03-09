@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cloud_lib',
-    version='1.1.5',
+    version='1.1.6',
     description='Cloud Service Library',
     long_description='https://pypi.python.org/pypi/cloud_lib',
     url='https://github.com/Akira-Taniguchi/cloud_lib',
@@ -17,5 +17,5 @@ setup(
       'Intended Audience :: Developers',
       'License :: OSI Approved :: MIT License'
     ],
-    install_requires=['boto3==1.2.2', 'google-api-python-client==1.5.0', 'oauth2client==1.5.2']
+    install_requires=['boto3==1.2.2', 'google-api-python-client==1.5.0']
 )
