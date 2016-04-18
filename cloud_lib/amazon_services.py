@@ -62,3 +62,32 @@ class S3(object):
             raise Exception('can\'t get file from s3')
         return StringIO(obj.get()['Body'].read())
 
+
+class Sqs(object):
+    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, queue_name, retry_count=3):
+        self.__retry_count = retry_count
+        session = Session(aws_access_key_id, aws_secret_access_key, region_name=region_name)
+        sqs = session.resource('sqs')
+        self.__queue = sqs.get_queue_by_name(QueueName=queue_name)
+
+    def put_message(self, message):
+        self.__queue.send_message(MessageBody=message)
+
+    def get_messages(self, max_number_of_messages=1):
+        messages = self.__queue.receive_messages(max_number_of_messages)
+        if len(messages) == 0:
+            return []
+        entries = []
+        result_list = []
+        for message in messages:
+            result_list.append(message.body)
+            entries.append({
+                'Id': message.message_id,
+                'ReceiptHandle': message.receipt_handle
+            })
+        response = self.__queue.delete_messages(
+            Entries=entries
+        )
+        if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+            raise Exception('delete messages is error')
+        return result_list
