@@ -62,6 +62,11 @@ class S3(object):
             raise Exception('can\'t get file from s3')
         return StringIO(obj.get()['Body'].read())
 
+    def upload_binary_file(self, bucket_name, key, local_file_path):
+        bucket = self.__s3.Bucket(bucket_name)
+        data = open(local_file_path, 'rb')
+        bucket.put_object(Key=key, Body=data)
+
 
 class Sqs(object):
     def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, queue_name, retry_count=3):
