@@ -69,8 +69,7 @@ class S3(object):
 
 
 class Sqs(object):
-    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, queue_name, retry_count=3):
-        self.__retry_count = retry_count
+    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, queue_name):
         session = Session(aws_access_key_id, aws_secret_access_key, region_name=region_name)
         sqs = session.resource('sqs')
         self.__queue = sqs.get_queue_by_name(QueueName=queue_name)
@@ -96,3 +95,13 @@ class Sqs(object):
         if response['ResponseMetadata']['HTTPStatusCode'] != 200:
             raise Exception('delete messages is error')
         return result_list
+
+
+class DynamoDb(object):
+    def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, table_name):
+        session = Session(aws_access_key_id, aws_secret_access_key, region_name=region_name)
+        dynamo = session.resource('dynamodb')
+        self.__table = dynamo.Table(table_name)
+
+    def get_record(self, key):
+        return self.__table.get_item(Key=key).get('Item', None)
