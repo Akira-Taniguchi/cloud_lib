@@ -216,6 +216,16 @@ get_table_schema_fields(data_set_id, table_id):ƒe[ƒuƒ‹‚ÌƒXƒL[ƒ}î•ñ‚ğæ“¾‚µ‚Ü‚
 | table_id | ü | ƒe[ƒuƒ‹‚Ìƒe[ƒuƒ‹ID | - | 
 –ß‚è’lFƒe[ƒuƒ‹ƒXƒL[ƒ}î•ñ(list)
 ***
+copy_table(source_data_set_id, source_table_id, destination_data_set_id, destination_table_id):ƒe[ƒuƒ‹‚ğƒRƒs[‚µ‚Ü‚·
+
+| –¼‘O | •K{ | à–¾ | ƒfƒtƒHƒ‹ƒg’l | 
+|:-----------|:------------:|:-----------|:-----------| 
+| source_data_set_id | ü | ƒRƒs[Œ³ƒe[ƒuƒ‹‚Ìƒf[ƒ^ƒZƒbƒgID | - | 
+| source_table_id | ü | ƒRƒs[Œ³ƒe[ƒuƒ‹‚Ìƒe[ƒuƒ‹ID | - | 
+| destination_data_set_id | ü | ƒRƒs[æƒe[ƒuƒ‹‚Ìƒf[ƒ^ƒZƒbƒgID | - | 
+| destination_table_id | ü | ƒRƒs[æƒe[ƒuƒ‹‚Ìƒe[ƒuƒ‹ID | - | 
+–ß‚è’lFŒ‹‰Êî•ñ(json)
+***
 
 ### CloudStorage
 #### google cloud storage‚ÉŠÖ˜A‚·‚é‹@”\‚ğ•Û‚µ‚½ƒNƒ‰ƒX‚Å‚·

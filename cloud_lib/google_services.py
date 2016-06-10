@@ -82,6 +82,28 @@ class BigQuery(AbsGoogleServices):
         body = self.__create_table_data(source_csv_path, source_schema, data_set_id, table_id)
         return self.__wait_job(body)
 
+    def copy_table(self, source_data_set_id, source_table_id, destination_data_set_id, destination_table_id):
+        job_data = {
+            'projectId': self.__project_id,
+            'configuration': {
+                'copy': {
+                    'sourceTable': {
+                        'projectId': self.__project_id,
+                        'datasetId': source_data_set_id,
+                        'tableId': source_table_id,
+                    },
+                    'destinationTable': {
+                        'projectId': self.__project_id,
+                        'datasetId': destination_data_set_id,
+                        'tableId': destination_table_id,
+                    },
+                    'createDisposition': 'CREATE_IF_NEEDED',
+                    'writeDisposition': 'WRITE_TRUNCATE'
+                }
+            }
+        }
+        return self.__wait_job(job_data)
+
     def create_view(self, data_set_id, view_name, query):
         body = {
             'tableReference': {
