@@ -71,6 +71,13 @@ class BigQuery(AbsGoogleServices):
     def delete_table(self, data_set_id, table_id):
         self.service.tables().delete(projectId=self.__project_id, datasetId=data_set_id, tableId=table_id).execute()
 
+    def get_table_data(self, data_set_id, table_id):
+        return self.service.tables().get(projectId=self.__project_id, datasetId=data_set_id, tableId=table_id).execute()
+
+    def update_table_schema(self, data_set_id, table_id, schema_fields):
+        self.service.tables().update(projectId=self.__project_id, datasetId=data_set_id, tableId=table_id,
+                                     body={'schema': {'fields': schema_fields}}).execute()
+
     def create_table(self, source_csv_path, source_schema, data_set_id, table_id):
         body = self.__create_table_data(source_csv_path, source_schema, data_set_id, table_id)
         return self.__wait_job(body)
@@ -88,10 +95,11 @@ class BigQuery(AbsGoogleServices):
         }
         self.service.tables().insert(projectId=self.__project_id, datasetId=data_set_id, body=body).execute()
 
-    def get_record_count(self, data_set_id, table_name):
-        query = 'SELECT COUNT(*) FROM {0}.{1}'.format(data_set_id, table_name)
-        for data_dict in self.query(query):
-            return int(data_dict['rows'][0][0])
+    def get_table_record_count(self, data_set_id, table_id):
+        return int(self.get_table_data(data_set_id, table_id)['numRows'])
+
+    def get_table_schema_fields(self, data_set_id, table_id):
+        return self.get_table_data(data_set_id, table_id)['schema']['fields']
 
     def import_csv_from_storage(self, storage_path, source_schema, data_set_id, table_id,
                                 write_disposition='WRITE_EMPTY'):
