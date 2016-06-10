@@ -97,7 +97,7 @@ class Sqs(object):
         return result_list
 
 
-class DynamoDb(object):
+class DynamoDB(object):
     def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, table_name):
         session = Session(aws_access_key_id, aws_secret_access_key, region_name=region_name)
         dynamo = session.resource('dynamodb')

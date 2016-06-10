@@ -39,8 +39,8 @@ stop_instance(instance_id):インスタンスを停止します
 戻り値：Bool
 ***
 
-### DynamoDb
-#### DynamoDbに関連する機能を保持したクラスです
+### DynamoDB
+#### DynamoDBに関連する機能を保持したクラスです
 ***
 get_record(key):key情報を元にレコード情報を返す
 
