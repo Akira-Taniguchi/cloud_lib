@@ -237,7 +237,7 @@ upload_file(local_file_path, bucket_name, storage_file_path):ƒtƒ@ƒCƒ‹‚ğƒAƒbƒvƒ
 | local_file_path | ü | ƒAƒbƒvƒ[ƒh‚·‚éƒtƒ@ƒCƒ‹‚Ìƒ[ƒJƒ‹ƒpƒX | - |
 | bucket_name | ü | ƒAƒbƒvƒ[ƒhæ‚ÌƒoƒPƒbƒg–¼Ì | - |
 | storage_file_path | ü | ƒAƒbƒvƒ[ƒhæ‚Ìƒtƒ@ƒCƒ‹ƒpƒX | - |
-–ß‚è’lFBool
+–ß‚è’lF‚È‚µ
 ***
 download_file(local_file_path, bucket_name, storage_file_path):ƒtƒ@ƒCƒ‹‚ğƒ_ƒEƒ“ƒ[ƒh‚µ‚Ü‚·
 
@@ -246,7 +246,7 @@ download_file(local_file_path, bucket_name, storage_file_path):ƒtƒ@ƒCƒ‹‚ğƒ_ƒEƒ“ƒ
 | local_file_path | ü | ƒ_ƒEƒ“ƒ[ƒhæ‚Ìƒ[ƒJƒ‹ƒpƒX | - |
 | bucket_name | ü | ƒ_ƒEƒ“ƒ[ƒhŒ³‚ÌƒoƒPƒbƒg–¼Ì | - |
 | storage_file_path | ü | ƒ_ƒEƒ“ƒ[ƒhŒ³‚Ìƒtƒ@ƒCƒ‹ƒpƒX | - |
-–ß‚è’lFBool
+–ß‚è’lF‚È‚µ
 ***
 get_list(bucket_name, name_prefix=None, content_type=None):‘¶İ‚·‚éƒtƒ@ƒCƒ‹‚ÌƒŠƒXƒg‚ğæ“¾‚µ‚Ü‚·
 

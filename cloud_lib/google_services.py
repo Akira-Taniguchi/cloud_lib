@@ -129,13 +129,6 @@ class BigQuery(AbsGoogleServices):
         return self.__wait_job(body)
 
     def query(self, query, time_out=60000, allow_large_results=False):
-        def create_record_dict(rows):
-            return {
-                'rows': rows,
-                'totalRows': page['totalRows'],
-                'totalBytesProcessed': page['totalBytesProcessed']
-            }
-
         query_data = {
             'query': query,
             'timeoutMs': time_out,
@@ -150,15 +143,12 @@ class BigQuery(AbsGoogleServices):
             if page['jobComplete'] is False:
                 raise Exception('job is not complete')
             if page['totalRows'] == '0':
-                yield create_record_dict([])
                 return
-            row_list = []
             for row in page['rows']:
                 value_list = []
                 for value in row['f']:
                     value_list.append(value['v'])
-                row_list.append(value_list)
-            yield create_record_dict(row_list)
+                yield value_list
 
     def get_table_list(self, data_set_id):
         token = None
@@ -255,17 +245,11 @@ class CloudStorage(AbsGoogleServices):
         request = self.service.objects().insert(bucket=bucket_name, name=storage_file_path, media_body=media)
         base_name = os.path.basename(local_file_path)
         while True:
-            try:
-                progress, response = request.next_chunk()
-                if progress:
-                    print '{0} is uploading {1}/100'.format(base_name, int(100 * progress.progress()))
-                else:
-                    break
-            except Exception, e:
-                print '{0} \'s upload is error'.format(base_name)
-                print str(e)
-                return False
-        return True
+            progress, response = request.next_chunk()
+            if progress:
+                print('{0} is uploading {1}/100'.format(base_name, int(100 * progress.progress())))
+            else:
+                break
 
     def download_file(self, local_file_path, bucket_name, storage_file_path):
         f = file(local_file_path, 'wb')
@@ -274,15 +258,9 @@ class CloudStorage(AbsGoogleServices):
         base_name = os.path.basename(local_file_path)
         done = False
         while not done:
-            try:
-                progress, done = media.next_chunk()
-                if progress:
-                    print '{0} is download {1}/100'.format(base_name, int(100 * progress.progress()))
-            except Exception, e:
-                print '{0} \'s download is error'.format(base_name)
-                print str(e)
-                return False
-        return True
+            progress, done = media.next_chunk()
+            if progress:
+                print('{0} is download {1}/100'.format(base_name, int(100 * progress.progress())))
 
     def get_list(self, bucket_name, name_prefix=None, content_type=None):
         fields_to_return = 'nextPageToken,items(name,size,contentType,metadata(my-key))'
